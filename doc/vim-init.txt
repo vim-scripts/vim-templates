@@ -1,0 +1,65 @@
+*vim_init.txt*		For Vim version 6.x		Last change: 2002 Oct 27
+
+|init_usage|		How to use this package
+|init_functions|	Description of used functions
+|init_templates|	How template system works
+
+-------------------------------------------------------------------------------
+*init_usage*		How to use this package
+
+You need to modify your .vimrc file, as example you can use that which comes
+with this package. There are some defined variables and autocommands. These
+autocommands performs correct calls functions by using filetype plugin.
+
+It enables you only to define functions inside some ftplugin, and the
+autocommands calls this functions for you. Over all ftplugins. If the function
+isn't defined nothing happens this situation is recognized and autocommand
+does nothing.
+
+During installation you need to modify directory where you store your template
+files.
+
+It comes with only two demo functions sets, for C/C++ and for bash scripts.
+Other example can be found in my LaTeX package.
+
+The C/C++ functions demonstrate file template against generated template. For
+base program in C/C++ it reads template from file. For header files it
+generates #ifndef/#define/#endif with unique identifier for this header file.
+
+The bash example demonstrate usage of WritePost trigger. This trigger is here
+used to change permissions. So the written bash script has +x right.
+
+-------------------------------------------------------------------------------
+*init_functions*	Description of used functions
+
+In every plugin that may use this package, you must define variable
+b:VIM_function_prefix. This variable handles inequality of functions from
+different plugins.
+
+So name of each function has form "{prefix}{name}".
+
+Init		this function is called after reading file, before ReadPost.
+ReadPre		this function is called before reading of file.
+ReadPost	this function is called after reading file.
+WritePre	this function is called before writing file.
+WritePost	this function is called after writing file.
+Template	this function is called when new file has to been created.
+
+-------------------------------------------------------------------------------
+*init_templates*	How template system works
+
+Your {prefix}Template function can call function ReadTemplate(template). Where
+template is name of template file. ReadTemplate tries to find this file in
+directories which is stored in g:VIM_templates_path and
+g:VIM_templates_path_default, in this order.
+
+Also there are some possible substitutions in the readed template.
+
+#DATE	- expands to current date and time
+#USER	- expands to current user name
+#FILE	- expands to edited file name
+
+Other substitutions can be defined in function TemplateDefaultSubstitution().
+
+-------------------------------------------------------------------------------
+ vim:tw=78:fo=tcq2:isk=!-~,^*,^\|,^\":ts=8:ft=help:norl:

@@ -1,0 +1,7 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=459
+
+This package can read/generate templates throught functions defined in ftplugins for that filetype.
+
+Also here is functions which throught autocommands performs actions from that ftplugin.
+
+Documentation and some examples are in package archive.
